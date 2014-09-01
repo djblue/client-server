@@ -2,16 +2,26 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // libraries for sockets
-#include <sys/types.h>
 #include <sys/socket.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 #include <netdb.h>
 
 // application struct
 #include "request.h"
+#include "error.h"
 
-#include <string.h> /* for memcpy */
+
+// global for storing user input
+struct Input {
+  char host[255];
+  int id;
+  int port;
+  char file[1024];
+} input;
 
 void usage (char* file) {
   printf(
@@ -23,12 +33,30 @@ void usage (char* file) {
   , file);
 }
 
-struct Input {
-  char host[255];
-  int id;
-  int port;
-  char file[1024];
-};
+int make_request (request *r) {
+
+  // create socket
+  int s;
+  if ((s = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0) {
+    error("cannot create socket");
+    return -1;
+  }
+
+  struct sockaddr_in server;
+  memset((char *)&server, 0, sizeof(server));
+
+  // server connection information
+  server.sin_family = AF_INET;
+  server.sin_addr.s_addr = inet_addr(input.host);
+  server.sin_port = htons(input.port);
+
+  if (sendto(s, "data", sizeof("data"), 0, (struct sockaddr *)&server, sizeof(server)) != sizeof("data")) {
+    error("sent a different number of bytes than expected");
+    return -1;
+  }
+
+  return 0;
+}
 
 int main (int argc, char *argv[]) {
 
@@ -36,8 +64,6 @@ int main (int argc, char *argv[]) {
     usage(argv[0]);
     return -1;
   }
-
-  struct Input input;
 
   strcpy(input.host, argv[1]);
   input.id = atoi(argv[2]);
@@ -47,7 +73,7 @@ int main (int argc, char *argv[]) {
   FILE *fd = fopen(input.file, "r");
 
   if (fd == NULL) {
-    printf("ERROR: unable to open file: %s\n", input.file);
+    error("unable to open file: %s", input.file);
     return -1;
   }
 
@@ -57,7 +83,7 @@ int main (int argc, char *argv[]) {
 
   while (fscanf(fd, "%[^\n]\n", line) == 1) {
 
-    printf("Executing(%d): %s\n", i, line);
+    printf("EXECUTING(%d): %s\n", i, line);
 
     if (strcmp(line, "fail") == 0) {
 
@@ -74,7 +100,10 @@ int main (int argc, char *argv[]) {
 
       strcpy(r.ip, "0.0.0.0");
       strcpy(r.name, "host");
+
       strcpy(r.operation, line);
+
+      make_request(&r);
 
       i += 1; // increment request count
     }
