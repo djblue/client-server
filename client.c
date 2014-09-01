@@ -14,7 +14,13 @@
 #include <string.h> /* for memcpy */
 
 void usage (char* file) {
-  printf("Usage: %s HOST ID PORT FILE\n", file);
+  printf(
+    "Usage: %s HOST ID PORT FILE\n\n"
+    "  HOST - hostname of server\n"
+    "  ID   - id of client\n"
+    "  PORT - port number of server\n"
+    "  FILE - script of commands to send to server\n\n"
+  , file);
 }
 
 struct Input {
