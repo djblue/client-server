@@ -46,8 +46,8 @@ int main (int argc, char *argv[]) {
 
   FILE *fd = fopen(input.file, "r");
 
-  if (fd < 0) {
-    printf("ERROR: unable to open file: %s", input.file);
+  if (fd == NULL) {
+    printf("ERROR: unable to open file: %s\n", input.file);
     return -1;
   }
 
