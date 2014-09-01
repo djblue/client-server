@@ -13,10 +13,29 @@
 
 #include <string.h> /* for memcpy */
 
-void usage () {
-  printf("Usage: server PORT\n");
+void usage (char* file) {
+  printf("Usage: %s HOST ID PORT FILE\n", file);
 }
 
-int main (int args, char *argv[]) {
+struct Input {
+  char host[255];
+  int id;
+  int port;
+  char file[1024];
+};
+
+int main (int argc, char *argv[]) {
+
+  struct Input input;
+
+  if (argc < 5) {
+    usage(argv[0]);
+    return -1;
+  }
+
+  strcpy(input.host, argv[1]);
+  input.id = atoi(argv[2]);
+  input.port = atoi(argv[3]);
+  strcpy(input.file, argv[4]);
 
 }
