@@ -26,16 +26,31 @@ struct Input {
 
 int main (int argc, char *argv[]) {
 
-  struct Input input;
-
   if (argc < 5) {
     usage(argv[0]);
     return -1;
   }
 
+  struct Input input;
+
   strcpy(input.host, argv[1]);
   input.id = atoi(argv[2]);
   input.port = atoi(argv[3]);
   strcpy(input.file, argv[4]);
+
+  FILE *fd = fopen(input.file, "r");
+
+  if (fd < 0) {
+    printf("ERROR: unable to open file: %s", input.file);
+    return -1;
+  }
+
+  char line[80];
+
+  while (fscanf(fd, "%[^\n]\n", line) == 1) {
+    printf("%s\n", line);
+  }
+
+  fclose(fd);
 
 }
