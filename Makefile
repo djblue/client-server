@@ -8,7 +8,7 @@ all: client server
 server: server.c;  $(CC) server.c -o server
 
 # build client component
-client: client.c; $(CC) client.c -o client
+client: request.h error.h client.c; $(CC) client.c -o client
 
 # run tests
 test: ;
