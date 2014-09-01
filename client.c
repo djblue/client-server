@@ -51,12 +51,36 @@ int main (int argc, char *argv[]) {
     return -1;
   }
 
-  char line[80];
+  int i = 0; // request count
+  int spawn = 0;
+  char line[80]; // line from script file
 
   while (fscanf(fd, "%[^\n]\n", line) == 1) {
-    printf("%s\n", line);
+
+    printf("Executing(%d): %s\n", i, line);
+
+    if (strcmp(line, "fail") == 0) {
+
+      // on failure, increment incarnation number
+      spawn += 1;
+
+    } else {
+
+      struct request r;
+
+      r.id = input.id;
+      r.index = i;
+      r.spawn = spawn;
+
+      strcpy(r.ip, "0.0.0.0");
+      strcpy(r.name, "host");
+      strcpy(r.operation, line);
+
+      i += 1; // increment request count
+    }
   }
 
-  fclose(fd);
+  fclose(fd); // clean up
 
+  return 0;
 }
