@@ -14,8 +14,11 @@
 // max buffer size
 #define BUFSIZE 2048
 
-void usage () {
-  printf("Usage: server PORT\n");
+void usage (char* file) {
+  printf(
+    "Usage: %s PORT\n\n"
+    "  PORT - port number of server\n\n"
+  , file);
 }
 
 // port - desired port number
@@ -72,8 +75,7 @@ int main (int args, char *argv[]) {
 
   // didn't provide port number
   if (args < 2) {
-    printf("ERROR: Please supply port number.\n");
-    usage(); // print usage information
+    usage(argv[0]); // print usage information
     return -1;
   }
 
@@ -81,8 +83,7 @@ int main (int args, char *argv[]) {
 
   // port specified was not a number
   if (port == 0) {
-    printf("ERROR: Port specified not a number.\n");
-    usage(); // print usage information
+    usage(argv[0]); // print usage information
     return -2;
   }
 
