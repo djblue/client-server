@@ -50,7 +50,8 @@ int make_request (request *r) {
   server.sin_addr.s_addr = inet_addr(input.host);
   server.sin_port = htons(input.port);
 
-  if (sendto(s, "data", sizeof("data"), 0, (struct sockaddr *)&server, sizeof(server)) != sizeof("data")) {
+  // make request to server
+  if (sendto(s, r, sizeof(*r), 0, (struct sockaddr *)&server, sizeof(server)) != sizeof(*r)) {
     error("sent a different number of bytes than expected");
     return -1;
   }
