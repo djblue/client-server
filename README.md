@@ -9,12 +9,13 @@ The client's job is to send commands to the server. The commands are stored in
 a script file which is passed in as a command line argument. The client can be
 called as follows:
 
-    client HOST ID PORT FILE
+    client HOST ID IP PORT FILE
 
 where:
 
 - HOST is the hostname/ip address of server
 - ID is the id of client
+- IP is the ip address of the server
 - PORT is the port number of server
 - FILE is the name of the script of commands to send to server
 
