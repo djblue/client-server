@@ -36,7 +36,7 @@ where
 
 The commands are read in by the client and sent to the server.
 
-Open a file a given mode (read, write or readwrite).
+Open a file in a specific mode (read, write or readwrite).
 
     open FILE
 
