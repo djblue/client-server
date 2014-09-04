@@ -12,6 +12,7 @@
 
 // application struct
 #include "request.h"
+#include "response.h"
 #include "error.h"
 
 

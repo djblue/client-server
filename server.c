@@ -10,6 +10,8 @@
 
 // application struct
 #include "request.h"
+#include "response.h"
+#include "error.h"
 
 // max buffer size
 #define BUFSIZE 2048
@@ -32,12 +34,13 @@ int server (short port) {
   socklen_t addrlen = sizeof(remaddr); // length of addresses
   int recvlen;                    /* # bytes received */
   unsigned char buf[BUFSIZE];     /* receive buffer */
+  struct request r;
   
   // SOCK_DGRAM - another name for packets , associated with connectionless
   // protocols
   s = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
   if (s < 0) {
-    printf("ERROR: cannot create socket.\n");
+    error("cannot create socket");
     return s;
   }
 
@@ -47,7 +50,7 @@ int server (short port) {
 
 
   if (bind(s, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0) {
-    printf("ERROR: failed to bind to socket.\n");
+    error("failed to bind to socket");
     return -1;
   }
 
@@ -56,11 +59,25 @@ int server (short port) {
 
   // wait for connections
   while (1 == 1) {
-    recvlen = recvfrom(s, buf, BUFSIZE, 0, (struct sockaddr *)&remaddr, &addrlen);
-    printf("received %d bytes\n", recvlen);
+    recvlen = recvfrom(s, (char *)&r, sizeof(r), 0, (struct sockaddr *)&remaddr, &addrlen);
+    //printf("received %d bytes\n", recvlen);
     if (recvlen > 0) {
-      buf[recvlen] = 0;
-      printf("received message: \"%s\"\n", buf);
+      printf(
+        "\nReceived Request\n"
+        "  ip: %s\n"
+        "  name: %s\n"
+        "  id: %d\n"
+        "  index: %d\n"
+        "  spawn: %d\n"
+        "  operation: %s\n"
+        ,
+        r.ip,
+        r.name,
+        r.id,
+        r.index,
+        r.spawn,
+        r.operation
+      );
     }
 
   }
