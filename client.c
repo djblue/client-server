@@ -17,17 +17,19 @@
 
 // global for storing user input
 struct Input {
-  char host[255];
+  char machine_name[255];
   int id;
+  char ip[15];
   int port;
   char file[1024];
 } input;
 
 void usage (char* file) {
   printf(
-    "Usage: %s HOST ID PORT FILE\n\n"
-    "  HOST - hostname of server\n"
+    "Usage: %s NAME ID IP PORT FILE\n\n"
+    "  NAME - name of client\n"
     "  ID   - id of client\n"
+    "  IP   - ip address of the server\n"
     "  PORT - port number of server\n"
     "  FILE - script of commands to send to server\n\n"
   , file);
@@ -47,7 +49,7 @@ int make_request (request *r) {
 
   // server connection information
   server.sin_family = AF_INET;
-  server.sin_addr.s_addr = inet_addr(input.host);
+  server.sin_addr.s_addr = inet_addr(input.ip);
   server.sin_port = htons(input.port);
 
   // make request to server
@@ -61,15 +63,16 @@ int make_request (request *r) {
 
 int main (int argc, char *argv[]) {
 
-  if (argc < 5) {
+  if (argc < 6) {
     usage(argv[0]);
     return -1;
   }
 
-  strcpy(input.host, argv[1]);
+  strcpy(input.machine_name, argv[1]);
   input.id = atoi(argv[2]);
-  input.port = atoi(argv[3]);
-  strcpy(input.file, argv[4]);
+  strcpy(input.ip, argv[3]);
+  input.port = atoi(argv[4]);
+  strcpy(input.file, argv[5]);
 
   FILE *fd = fopen(input.file, "r");
 
@@ -99,8 +102,8 @@ int main (int argc, char *argv[]) {
       r.index = i;
       r.spawn = spawn;
 
-      strcpy(r.ip, "0.0.0.0");
-      strcpy(r.name, "host");
+      strcpy(r.ip, "");
+      strcpy(r.name, input.machine_name);
 
       strcpy(r.operation, line);
 
