@@ -28,4 +28,24 @@ struct request {
 
 };
 
+void print(request *req) {
+  printf("req: {"
+    "\"ip\": \"%s\", "
+    "\"name\": \"%s\", "
+    "\"id\": %d, "
+    "\"index\": %d, "
+    "\"spawn\": %d, "
+    "\"operation\": \"%s\""
+    "}\n"
+    ,
+    req->ip,
+    req->name,
+    req->id,
+    req->index,
+    req->spawn,
+    req->operation
+  );
+  fflush(stdout);
+}
+
 #endif

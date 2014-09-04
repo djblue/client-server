@@ -1,5 +1,5 @@
-#ifndef REQUEST_H
-#define REQUEST_H
+#ifndef RESPONSE_H 
+#define RESPONSE_H
 
 struct response {
 
@@ -7,5 +7,15 @@ struct response {
   int status;
 
 };
+
+void print(response *res) {
+  printf("res: {"
+    "\"status\": %d"
+    "}\n"
+    ,
+    res->status
+  );
+  fflush(stdout);
+}
 
 #endif

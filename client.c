@@ -36,10 +36,14 @@ void usage (char* file) {
   , file);
 }
 
-int make_request (request *r) {
+int make_request (request *req) {
+
+  struct sockaddr_in remaddr;     /* remote address */
+  socklen_t addrlen = sizeof(remaddr); // length of addresses
 
   // create socket
   int s;
+
   if ((s = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0) {
     error("cannot create socket");
     return -1;
@@ -54,9 +58,13 @@ int make_request (request *r) {
   server.sin_port = htons(input.port);
 
   // make request to server
-  if (sendto(s, r, sizeof(*r), 0, (struct sockaddr *)&server, sizeof(server)) != sizeof(*r)) {
+  if (sendto(s, req, sizeof(*req), 0, (struct sockaddr *)&server, sizeof(server)) != sizeof(*req)) {
     error("sent a different number of bytes than expected");
     return -1;
+  } else {
+    response res;
+    int recvlen = recvfrom(s, &res, sizeof(res), 0, (struct sockaddr *)&remaddr, &addrlen);
+    print(&res);
   }
 
   return 0;
@@ -97,18 +105,18 @@ int main (int argc, char *argv[]) {
 
     } else {
 
-      struct request r;
+      request req;
 
-      r.id = input.id;
-      r.index = i;
-      r.spawn = spawn;
+      req.id = input.id;
+      req.index = i;
+      req.spawn = spawn;
 
-      strcpy(r.ip, "");
-      strcpy(r.name, input.machine_name);
+      strcpy(req.ip, "0.0.0.0");
+      strcpy(req.name, input.machine_name);
 
-      strcpy(r.operation, line);
+      strcpy(req.operation, line);
 
-      make_request(&r);
+      make_request(&req);
 
       i += 1; // increment request count
     }

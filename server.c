@@ -23,6 +23,10 @@ void usage (char* file) {
   , file);
 }
 
+void process_request (request *req, response *res) {
+  res->status = 0;
+}
+
 // port - desired port number
 // returns if server process was successful
 int server (short port) {
@@ -34,7 +38,7 @@ int server (short port) {
   socklen_t addrlen = sizeof(remaddr); // length of addresses
   int recvlen;                    /* # bytes received */
   unsigned char buf[BUFSIZE];     /* receive buffer */
-  struct request r;
+  request req;
   
   // SOCK_DGRAM - another name for packets , associated with connectionless
   // protocols
@@ -59,27 +63,15 @@ int server (short port) {
 
   // wait for connections
   while (1 == 1) {
-    recvlen = recvfrom(s, (char *)&r, sizeof(r), 0, (struct sockaddr *)&remaddr, &addrlen);
-    //printf("received %d bytes\n", recvlen);
+    recvlen = recvfrom(s, &req, sizeof(req), 0, (struct sockaddr *)&remaddr, &addrlen);
     if (recvlen > 0) {
-      printf(
-        "\nReceived Request\n"
-        "  ip: %s\n"
-        "  name: %s\n"
-        "  id: %d\n"
-        "  index: %d\n"
-        "  spawn: %d\n"
-        "  operation: %s\n"
-        ,
-        r.ip,
-        r.name,
-        r.id,
-        r.index,
-        r.spawn,
-        r.operation
-      );
+      print(&req);
+      response res;
+      process_request(&req, &res);
+      if (sendto(s, &res, sizeof(res), 0, (struct sockaddr *)&remaddr, sizeof(remaddr)) != sizeof(res)) {
+        error("sent a different number of bytes than expected");
+      }
     }
-
   }
 
   return 0;
