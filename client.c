@@ -64,7 +64,7 @@ int make_request (request *req) {
   } else {
     response res;
     int recvlen = recvfrom(s, &res, sizeof(res), 0, (struct sockaddr *)&remaddr, &addrlen);
-    print(&res);
+    prints(&res);
   }
 
   return 0;

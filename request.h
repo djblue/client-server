@@ -5,7 +5,7 @@
 // but the positions of the elements are the same, so this struct should still
 // work for other teams.
 
-struct request {
+typedef struct {
 
   // Holds client IP address in dotted decimal
   char ip[16]; // client ip
@@ -26,9 +26,9 @@ struct request {
   // File operation client sends to server
   char operation[80];
 
-};
+} request;
 
-void print(request *req) {
+void printq(request *req) {
   printf("req: {"
     "\"ip\": \"%s\", "
     "\"name\": \"%s\", "

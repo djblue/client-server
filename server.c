@@ -65,7 +65,7 @@ int server (short port) {
   while (1 == 1) {
     recvlen = recvfrom(s, &req, sizeof(req), 0, (struct sockaddr *)&remaddr, &addrlen);
     if (recvlen > 0) {
-      print(&req);
+      printq(&req);
       response res;
       process_request(&req, &res);
       if (sendto(s, &res, sizeof(res), 0, (struct sockaddr *)&remaddr, sizeof(remaddr)) != sizeof(res)) {

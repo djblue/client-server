@@ -1,14 +1,14 @@
 #ifndef RESPONSE_H 
 #define RESPONSE_H
 
-struct response {
+typedef struct {
 
   // status code of the request (from discussion board)
   int status;
 
-};
+} response;
 
-void print(response *res) {
+void prints(response *res) {
   printf("res: {"
     "\"status\": %d"
     "}\n"
