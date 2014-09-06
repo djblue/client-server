@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // libraries for sockets
 #include <sys/types.h>
@@ -9,12 +10,10 @@
 #include <netdb.h>
 
 // application struct
+#include "fs.h"
 #include "request.h"
 #include "response.h"
 #include "error.h"
-
-// max buffer size
-#define BUFSIZE 2048
 
 void usage (char* file) {
   printf(
@@ -23,7 +22,29 @@ void usage (char* file) {
   , file);
 }
 
+// parse operation command and dispatch file operations
+void dispatch (const char *cmd) {
+
+  if (strncmp("open", cmd, 4) == 0) {
+    printf("open");
+  } else if (strncmp("close", cmd, 5) == 0) {
+    printf("close");
+  } else if (strncmp("read", cmd, 4) == 0) {
+    printf("read");
+  } else if (strncmp("write", cmd, 5) == 0) {
+    printf("write");
+  } else if (strncmp("lseek", cmd, 5) == 0) {
+    printf("lseek");
+  } else {
+    printf("unknown");
+  }
+
+  printf("\n");
+  fflush(stdout);
+}
+
 void process_request (request *req, response *res) {
+  dispatch(req->operation);
   res->status = 0;
 }
 
@@ -37,7 +58,6 @@ int server (short port) {
   struct sockaddr_in remaddr;     /* remote address */
   socklen_t addrlen = sizeof(remaddr); // length of addresses
   int recvlen;                    /* # bytes received */
-  unsigned char buf[BUFSIZE];     /* receive buffer */
   request req;
   
   // SOCK_DGRAM - another name for packets , associated with connectionless
