@@ -38,7 +38,7 @@ The commands are read in by the client and sent to the server.
 
 Open a file in a specific mode (read, write or readwrite).
 
-    open FILE
+    open FILE MODE
 
 Close a file.
 
