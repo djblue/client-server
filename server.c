@@ -23,29 +23,28 @@ void usage (char* file) {
 }
 
 // parse operation command and dispatch file operations
-void dispatch (const char *cmd) {
+void dispatch (request *req, response *res) {
+
+  client *c = &req->c;
+  // parse operation
+  char *cmd = strtok(req->operation, " ");
+  char *file = strtok(NULL, " ");
+  char *arg = strtok(NULL, " ");
 
   if (strncmp("open", cmd, 4) == 0) {
-    printf("open");
+    res->status = file_open(c, file, arg);
   } else if (strncmp("close", cmd, 5) == 0) {
-    printf("close");
+    res->status = file_close(c, file);
   } else if (strncmp("read", cmd, 4) == 0) {
-    printf("read");
+    res->status = file_read(c, file, atoi(arg), res->content);
   } else if (strncmp("write", cmd, 5) == 0) {
-    printf("write");
+    res->status = file_write(c, file, arg);
   } else if (strncmp("lseek", cmd, 5) == 0) {
-    printf("lseek");
+    res->status = file_lseek(c, file, atoi(arg));
   } else {
-    printf("unknown");
+    res->status = -1;
+    strcpy(res->content, "unknown file operation.");
   }
-
-  printf("\n");
-  fflush(stdout);
-}
-
-void process_request (request *req, response *res) {
-  dispatch(req->operation);
-  res->status = 0;
 }
 
 // port - desired port number
@@ -87,7 +86,7 @@ int server (short port) {
     if (recvlen > 0) {
       printq(&req);
       response res;
-      process_request(&req, &res);
+      dispatch(&req, &res);
       if (sendto(s, &res, sizeof(res), 0, (struct sockaddr *)&remaddr, sizeof(remaddr)) != sizeof(res)) {
         error("sent a different number of bytes than expected");
       }

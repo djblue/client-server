@@ -96,7 +96,7 @@ int main (int argc, char *argv[]) {
 
   while (fscanf(fd, "%[^\n]\n", line) == 1) {
 
-    printf("EXECUTING(%d): %s\n", i, line);
+    //printf("EXECUTING(%d): %s\n", i, line);
 
     if (strcmp(line, "fail") == 0) {
 
@@ -107,12 +107,12 @@ int main (int argc, char *argv[]) {
 
       request req;
 
-      req.id = input.id;
-      req.index = i;
-      req.spawn = spawn;
+      req.c.id = input.id;
+      req.c.index = i;
+      req.c.spawn = spawn;
 
       strcpy(req.ip, "0.0.0.0");
-      strcpy(req.name, input.machine_name);
+      strcpy(req.c.name, input.machine_name);
 
       strcpy(req.operation, line);
 

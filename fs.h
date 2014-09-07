@@ -2,18 +2,11 @@
 #define FS_H
 
 #include <string.h>
+#include "client_info.h"
 
 #define MAX_CLIENTS 1024
 
 // clients own files in filesystem
-
-// struct to define clients
-typedef struct {
-  char name[24];  // m
-  int id;         // c
-  int index;      // r
-  int spawn;      // i
-} client;
 
 // struct to define a table of clients
 typedef struct {
@@ -54,32 +47,47 @@ int add_client (clients *self, client *c) {
 typedef struct {
   int locked; // is the file locked
   int client; // who locked the file
-  char filename[24];
+  char file[24];
 } lock;
 
-int is_locked (client *c, char *filename) {
+// check if a file is locked for a client
+int is_locked (client *c, char *file) {
 }
 
-int lock_file (client *c, char *filename) {
+// lock a file for a client
+int lock_file (client *c, char *file) {
 }
 
-int unlock_file (client *c, char *filename) {
+// unlock a file for for a client
+int unlock_file (client *c, char *file) {
 }
 
 
-int open () {
+// open/lock file for a machine if file is not already locked.
+int file_open (client *c, char *file, char *mode) {
+  return 0;
 }
 
-int close () {
+// close/unlock file for a machine, if there is a lock and they have the current
+// lock
+int file_close (client *c, char *file) {
+  return 0;
 }
 
-int read () {
+// read next n bytes from a file into content buffer
+int file_read (client *c, char *file, int n, char *content) {
+  return 0;
 }
 
-int write () {
+// write str to file
+int file_write (client *c, char *file, char *str) {
+  return 0;
 }
 
-int lseek () {
+// set the position of the file pointer to N bytes from the beginning of the
+// file.
+int file_lseek (client *c, char *file, int n) {
+  return 0;
 }
 
 #endif
