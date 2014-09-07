@@ -13,7 +13,7 @@ called as follows:
 
 where:
 
-- HOST is the hostname/ip address of server
+- NAME is the machine name of the client
 - ID is the id of client
 - IP is the ip address of the server
 - PORT is the port number of server
