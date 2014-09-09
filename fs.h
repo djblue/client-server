@@ -2,46 +2,14 @@
 #define FS_H
 
 #include <string.h>
+#include <stdio.h>
+
+#include <map>
+#include <string>
+
+using namespace std;
+
 #include "client_info.h"
-
-#define MAX_CLIENTS 1024
-
-// clients own files in filesystem
-
-// struct to define a table of clients
-typedef struct {
-  client list[MAX_CLIENTS];
-  int length;
-} clients;
-
-// get client by name
-client *get_client (clients *self, char *name) {
-  int i;
-  for (i = 0; i < self->length; i++) {
-    if (strcmp(self->list[i].name, name) == 0) {
-      return  &self->list[i];
-    }
-  }
-
-  return NULL;
-}
-
-// add a new client
-int add_client (clients *self, client *c) {
-
-  int i = self->length;
-
-  if (i > MAX_CLIENTS) return 0;
-
-  strcpy(self->list[i].name, c->name);
-  self->list[i].id     = c->id;
-  self->list[i].index  = c->index;
-  self->list[i].spawn  = c->spawn;
-
-  self->length += 1; // move to next spot
-
-  return 1;
-}
 
 // struct to define which clients locked which files
 typedef struct {
@@ -50,8 +18,12 @@ typedef struct {
   char file[24];
 } lock;
 
+// machine_name -> file_name -> lock
+map<string, map<string, lock> > locks;
+
 // check if a file is locked for a client
 int is_locked (client *c, char *file) {
+  return locks[string(c->name)].count(string(file));
 }
 
 // lock a file for a client
@@ -65,6 +37,15 @@ int unlock_file (client *c, char *file) {
 
 // open/lock file for a machine if file is not already locked.
 int file_open (client *c, char *file, char *mode) {
+
+  // check if file is already locked by another client on the same machine
+  if (is_locked(c, file) == 1) {
+    return -1;
+
+  // open file for client in given mode
+  } else {
+  }
+
   return 0;
 }
 

@@ -1,5 +1,5 @@
 # variables
-CC=gcc
+CC=g++
 
 all: client server
 

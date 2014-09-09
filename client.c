@@ -28,7 +28,7 @@ struct Input {
 void usage (char* file) {
   printf(
     "Usage: %s NAME ID IP PORT FILE\n\n"
-    "  NAME - name of client\n"
+    "  NAME - machine name of client\n"
     "  ID   - id of client\n"
     "  IP   - ip address of the server\n"
     "  PORT - port number of server\n"
@@ -107,12 +107,12 @@ int main (int argc, char *argv[]) {
 
       request req;
 
-      req.c.id = input.id;
-      req.c.index = i;
-      req.c.spawn = spawn;
+      req.id = input.id;
+      req.index = i;
+      req.spawn = spawn;
 
-      strcpy(req.ip, "0.0.0.0");
-      strcpy(req.c.name, input.machine_name);
+      strcpy(req.ip, "");
+      strcpy(req.name, input.machine_name);
 
       strcpy(req.operation, line);
 

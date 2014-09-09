@@ -9,8 +9,11 @@
 #include <sys/socket.h>
 #include <netdb.h>
 
+#include <map>
+
 // application struct
 #include "fs.h"
+#include "client_info.h"
 #include "request.h"
 #include "response.h"
 #include "error.h"
@@ -22,29 +25,57 @@ void usage (char* file) {
   , file);
 }
 
+using namespace std;
+
+// machine -> client id -> client
+map<string, map<int, client> > clients;
+
+map<string,response> cache;
+
 // parse operation command and dispatch file operations
 void dispatch (request *req, response *res) {
 
-  client *c = &req->c;
+  char buffer[80];
+  sprintf(buffer, "%s:%d:%d", req->name, req->id, req->index);
+
+  if (cache.count(string(buffer)) > 0) {
+    *res = cache[string(buffer)];
+    return;
+  }
+
+  int status;
+
+  client *c = (client*) (&req) + sizeof(req->ip);
+  
   // parse operation
   char *cmd = strtok(req->operation, " ");
   char *file = strtok(NULL, " ");
   char *arg = strtok(NULL, " ");
 
+
   if (strncmp("open", cmd, 4) == 0) {
-    res->status = file_open(c, file, arg);
+    status = file_open(c, file, arg);
+    if (status == -1) {
+      strcpy(res->content, "file locked by another client.");
+    } else {
+      strcpy(res->content, "ok");
+    }
+
   } else if (strncmp("close", cmd, 5) == 0) {
-    res->status = file_close(c, file);
+    status = file_close(c, file);
   } else if (strncmp("read", cmd, 4) == 0) {
-    res->status = file_read(c, file, atoi(arg), res->content);
+    status = file_read(c, file, atoi(arg), res->content);
   } else if (strncmp("write", cmd, 5) == 0) {
-    res->status = file_write(c, file, arg);
+    status = file_write(c, file, arg);
   } else if (strncmp("lseek", cmd, 5) == 0) {
-    res->status = file_lseek(c, file, atoi(arg));
+    status = file_lseek(c, file, atoi(arg));
   } else {
-    res->status = -1;
+    status = -1;
     strcpy(res->content, "unknown file operation.");
   }
+
+  res->status = status;
+  cache[string(buffer)] = *res;
 }
 
 // port - desired port number
