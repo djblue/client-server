@@ -19,6 +19,8 @@ where:
 - PORT is the port number of server
 - FILE is the name of the script of commands to send to server
 
+NOTE: since the server has a 1:3 chance of failure, we have have a timeout of 5
+seconds and a max of 3 retries.
 
 ## The Server
 
@@ -30,6 +32,13 @@ commands. The server can be started as follows:
 where
 
 - PORT is port number of server to listen on
+
+__NOTE__: by default the server simulates errors as follows by generating a random
+number between 0-2, and performing one of the following actions.
+
+- 0: execute file command
+- 1: execute but don't respond
+- 2: don't execute and don't respond
 
 
 ## File Commands

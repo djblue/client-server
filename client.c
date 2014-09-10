@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 // libraries for sockets
 #include <sys/socket.h>
@@ -44,9 +45,18 @@ int make_request (request *req) {
   // create socket
   int s;
 
+  // bind to socket
   if ((s = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0) {
     error("cannot create socket");
     return -1;
+  }
+
+  // set socket timeout period
+  struct timeval timeout;
+  timeout.tv_sec = 0;
+  timeout.tv_usec = 100000;
+  if (setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout)) < 0) {
+    error("cannot set timeout");
   }
 
   struct sockaddr_in server;
@@ -58,14 +68,20 @@ int make_request (request *req) {
   server.sin_port = htons(input.port);
 
   // make request to server
-  if (sendto(s, req, sizeof(*req), 0, (struct sockaddr *)&server, sizeof(server)) != sizeof(*req)) {
-    error("sent a different number of bytes than expected");
-    return -1;
-  } else {
-    response res;
-    int recvlen = recvfrom(s, &res, sizeof(res), 0, (struct sockaddr *)&remaddr, &addrlen);
-    prints(&res);
-  }
+  int count = 0, recvlen;
+  response res;
+  memset(&res, 0, sizeof(res));
+  do {
+    if (sendto(s, req, sizeof(*req), 0, (struct sockaddr *)&server, sizeof(server)) != sizeof(*req)) {
+      error("sent a different number of bytes than expected");
+      continue;
+    } else {
+      recvlen = recvfrom(s, &res, sizeof(res), 0, (struct sockaddr *)&remaddr, &addrlen);
+      count += 1;
+    }
+  } while (recvlen < 0 && count < 10);
+
+  prints(&res);
 
   return 0;
 }

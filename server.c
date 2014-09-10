@@ -3,11 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+
 
 // libraries for sockets
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
+
 
 #include <map>
 
@@ -84,6 +87,7 @@ int server (short port) {
   
   // setup a socket
   int s; // socket connection
+  int random; // random number to simulate errors
   struct sockaddr_in myaddr;
   struct sockaddr_in remaddr;     /* remote address */
   socklen_t addrlen = sizeof(remaddr); // length of addresses
@@ -113,14 +117,40 @@ int server (short port) {
 
   // wait for connections
   while (1 == 1) {
+
     recvlen = recvfrom(s, &req, sizeof(req), 0, (struct sockaddr *)&remaddr, &addrlen);
+
     if (recvlen > 0) {
-      printq(&req);
+
       response res;
-      dispatch(&req, &res);
-      if (sendto(s, &res, sizeof(res), 0, (struct sockaddr *)&remaddr, sizeof(remaddr)) != sizeof(res)) {
-        error("sent a different number of bytes than expected");
+      memset(&res, 0, sizeof(res));
+
+      printq(&req);
+
+      random = rand() % 3;
+      //printf("%d\n", random);
+
+      // switch to simulate errors
+      switch(random) {
+        
+        // execute file command and respond
+        case 0:  //printf("execute file command and respond\n");
+          dispatch(&req, &res);
+          if (sendto(s, &res, sizeof(res), 0, (struct sockaddr *)&remaddr, sizeof(remaddr)) != sizeof(res)) {
+            error("sent a different number of bytes than expected");
+          }
+          break;
+      
+        // execute but don't respond
+        case 1: //printf("execute but don't respond\n");
+          dispatch(&req, &res);
+          break;
+
+        // don't execute and don't respond
+        case 2: //printf("don't execute and don't respond\n");
+          break;
       }
+
     }
   }
 
@@ -145,6 +175,8 @@ int main (int args, char *argv[]) {
     usage(argv[0]); // print usage information
     return -2;
   }
+
+  srand(time(NULL));
 
   return server(port);
 }
