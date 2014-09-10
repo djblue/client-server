@@ -10,10 +10,10 @@ typedef struct {
 } response;
 
 void prints(response *res) {
-  printf("res: ("
+  printf("res: { "
     "status: %d, "
     "content: %s"
-    ")\n"
+    " }\n"
     ,
     res->status,
     res->content

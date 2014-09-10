@@ -42,13 +42,15 @@ void dispatch (request *req, response *res) {
   sprintf(buffer, "%s:%d:%d", req->name, req->id, req->index);
 
   if (cache.count(string(buffer)) > 0) {
-    *res = cache[string(buffer)];
+    response *old = &cache[string(buffer)];
+    res->status = old->status;
+    strcpy(res->content, old->content);
     return;
   }
 
   int status;
 
-  client *c = (client*) (&req) + sizeof(req->ip);
+  client *c = (client*) &req->name;
   
   // parse operation
   char *cmd = strtok(req->operation, " ");
@@ -58,25 +60,44 @@ void dispatch (request *req, response *res) {
 
   if (strncmp("open", cmd, 4) == 0) {
     status = file_open(c, file, arg);
-    if (status == -1) {
-      strcpy(res->content, "file locked by another client.");
+    if (status == 1) {
+      strcpy(res->content, "cannot open file");
     } else {
-      strcpy(res->content, "ok");
+      strcpy(res->content, "ok - file opened");
     }
 
   } else if (strncmp("close", cmd, 5) == 0) {
     status = file_close(c, file);
+    if (status == 0) {
+      strcpy(res->content, "ok - file closed");
+    }
+
   } else if (strncmp("read", cmd, 4) == 0) {
     status = file_read(c, file, atoi(arg), res->content);
+
   } else if (strncmp("write", cmd, 5) == 0) {
+    arg = strtok(arg, "\""); // get character from inside string
     status = file_write(c, file, arg);
+    if (status == strlen(arg)) {
+      strcpy(res->content, "ok - file write");
+    } else {
+      strcpy(res->content, "not ok");
+    }
+
   } else if (strncmp("lseek", cmd, 5) == 0) {
     status = file_lseek(c, file, atoi(arg));
+    if (status == 0) {
+      strcpy(res->content, "ok - file seek");
+    }
+
   } else {
-    status = -1;
+    status = 500;
     strcpy(res->content, "unknown file operation.");
   }
 
+  if (status == -1) {
+    strcpy(res->content, "file locked by another client");
+  }
   res->status = status;
   cache[string(buffer)] = *res;
 }
@@ -131,7 +152,7 @@ int server (short port) {
       //printf("%d\n", random);
 
       // switch to simulate errors
-      switch(random) {
+      switch(0) {
         
         // execute file command and respond
         case 0:  //printf("execute file command and respond\n");

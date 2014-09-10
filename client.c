@@ -71,6 +71,7 @@ int make_request (request *req) {
   int count = 0, recvlen;
   response res;
   memset(&res, 0, sizeof(res));
+  res.status = -200; // arbitrary number that means no successful response
   do {
     if (sendto(s, req, sizeof(*req), 0, (struct sockaddr *)&server, sizeof(server)) != sizeof(*req)) {
       error("sent a different number of bytes than expected");
@@ -79,9 +80,10 @@ int make_request (request *req) {
       recvlen = recvfrom(s, &res, sizeof(res), 0, (struct sockaddr *)&remaddr, &addrlen);
       count += 1;
     }
-  } while (recvlen < 0 && count < 10);
+  } while (recvlen < 0 && count < 100);
 
   prints(&res);
+  printf("---\n");
 
   return 0;
 }

@@ -29,16 +29,16 @@ typedef struct {
 } request;
 
 void printq(request *req) {
-  printf("req: ("
-    "ip: %s, "
+  printf("req: { "
+    //"ip: %s, "
     "name: %s, "
     "id: %d, "
     "index: %d, "
     "spawn: %d, "
-    "operation: %s"
-    ")\n"
+    "exec: %s"
+    " }\n"
     ,
-    req->ip,
+    //req->ip,
     req->name,
     req->id,
     req->index,
