@@ -13,14 +13,14 @@ called as follows:
 
 where:
 
-- NAME is the machine name of the client
+- HOST is the host name of the client
 - ID is the id of client
 - IP is the ip address of the server
 - PORT is the port number of server
 - FILE is the name of the script of commands to send to server
 
-NOTE: since the server has a 1:3 chance of failure, we have have a timeout of 5
-seconds and a max of 3 retries.
+NOTE: since the server has a 1:3 chance of failure, we have have a timeout with
+a max of 100 retries.
 
 ## The Server
 
