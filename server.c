@@ -96,7 +96,7 @@ void dispatch (request *req, response *res) {
   }
 
   if (status == -1) {
-    strcpy(res->content, "file locked by another client");
+    strcpy(res->content, "file locked");
   }
   res->status = status;
   cache[string(buffer)] = *res;
@@ -146,16 +146,14 @@ int server (short port) {
       response res;
       memset(&res, 0, sizeof(res));
 
-      printq(&req);
-
       random = rand() % 3;
       //printf("%d\n", random);
 
       // switch to simulate errors
-      switch(0) {
+      switch(random) {
         
         // execute file command and respond
-        case 0:  //printf("execute file command and respond\n");
+        case 2:  //printf("execute file command and respond\n");
           dispatch(&req, &res);
           if (sendto(s, &res, sizeof(res), 0, (struct sockaddr *)&remaddr, sizeof(remaddr)) != sizeof(res)) {
             error("sent a different number of bytes than expected");
@@ -168,7 +166,7 @@ int server (short port) {
           break;
 
         // don't execute and don't respond
-        case 2: //printf("don't execute and don't respond\n");
+        case 0: //printf("don't execute and don't respond\n");
           break;
       }
 

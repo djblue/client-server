@@ -71,7 +71,7 @@ int file_open (client *c, char *file, char *mode) {
   } else if (strncmp("write", mode, 5) == 0) {
     l->fd = fopen(l->name, "w");
   } else if (strncmp("readwrite", mode, 9) == 0) {
-    l->fd = fopen(l->name, "r+");
+    l->fd = fopen(l->name, "rw");
   } else {
     return -1;
   }
@@ -84,7 +84,7 @@ int file_open (client *c, char *file, char *mode) {
 int file_close (client *c, char *file) {
   if (has_lock(c, file) != 1) return -1;
   lock *l = get_lock(c, file);
-  int status = fclose (l->fd);
+  int status = fclose(l->fd);
   unlock_file(c, file);
   return status;
 }

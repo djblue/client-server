@@ -1,6 +1,8 @@
 #ifndef REQUEST_H
 #define REQUEST_H
 
+#include "colors.h"
+
 // The names of the fields differ from the struct specific in the assignment,
 // but the positions of the elements are the same, so this struct should still
 // work for other teams.
@@ -35,7 +37,7 @@ void printq(request *req) {
     "id: %d, "
     "index: %d, "
     "spawn: %d, "
-    "exec: %s"
+    "exec: "__purple("%s")
     " }\n"
     ,
     //req->ip,
