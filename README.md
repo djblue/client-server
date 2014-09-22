@@ -144,8 +144,11 @@ server logs
 ------------
 client 1 logs
 ------------
-client 2 logs
+     .
+     .
+     .
 ------------
+client n logs
 ```
 
 ## Conclusion
