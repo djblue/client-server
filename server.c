@@ -1,4 +1,4 @@
-// stateful file locking client 
+// stateful file locking server
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,6 +9,7 @@
 // libraries for sockets
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <arpa/inet.h>
 #include <netdb.h>
 
 
@@ -36,7 +37,7 @@ map<string, map<int, client> > clients;
 map<string,response> cache;
 
 // parse operation command and dispatch file operations
-void dispatch (request *req, response *res) {
+void dispatch (request *req, response *res, char *log) {
 
   char buffer[80];
   sprintf(buffer, "%s:%d:%d", req->name, req->id, req->index);
@@ -45,6 +46,7 @@ void dispatch (request *req, response *res) {
     response *old = &cache[string(buffer)];
     res->status = old->status;
     strcpy(res->content, old->content);
+    strcpy(log, "res from cache");
     return;
   }
 
@@ -57,19 +59,21 @@ void dispatch (request *req, response *res) {
   char *file = strtok(NULL, " ");
   char *arg = strtok(NULL, " ");
 
-
   if (strncmp("open", cmd, 4) == 0) {
     status = file_open(c, file, arg);
     if (status == 1) {
       strcpy(res->content, "cannot open file");
+      strcpy(log, "cannot open file");
     } else {
       strcpy(res->content, "ok - file opened");
+      strcpy(log, "ok - file opened");
     }
 
   } else if (strncmp("close", cmd, 5) == 0) {
     status = file_close(c, file);
     if (status == 0) {
       strcpy(res->content, "ok - file closed");
+      strcpy(log, "ok - file closed");
     }
 
   } else if (strncmp("read", cmd, 4) == 0) {
@@ -80,26 +84,36 @@ void dispatch (request *req, response *res) {
     status = file_write(c, file, arg);
     if (status == strlen(arg)) {
       strcpy(res->content, "ok - file write");
+      strcpy(log, "ok - file write");
     } else {
       strcpy(res->content, "not ok");
+      strcpy(log, "not ok");
     }
 
   } else if (strncmp("lseek", cmd, 5) == 0) {
     status = file_lseek(c, file, atoi(arg));
     if (status == 0) {
       strcpy(res->content, "ok - file seek");
+      strcpy(log, "ok - file seek");
     }
 
   } else {
     status = 500;
     strcpy(res->content, "unknown file operation.");
+    strcpy(log, "unknown file operation.");
   }
 
   if (status == -1) {
     strcpy(res->content, "file locked");
+    strcpy(log, "file locked");
   }
   res->status = status;
   cache[string(buffer)] = *res;
+}
+
+void log (request *req, char *action, char *msg) {
+  printf("{ ip: %s, name: %s, id: %d, index: %d, exec: %s, action: %s, log: "__purple("%s")" }\n",
+    req->ip, req->name, req->id, req->index, req->operation, action, msg);
 }
 
 // port - desired port number
@@ -109,10 +123,11 @@ int server (short port) {
   // setup a socket
   int s; // socket connection
   int random; // random number to simulate errors
+  char buff[256];
   struct sockaddr_in myaddr;
-  struct sockaddr_in remaddr;     /* remote address */
+  struct sockaddr_in remaddr;     // remote address
   socklen_t addrlen = sizeof(remaddr); // length of addresses
-  int recvlen;                    /* # bytes received */
+  int recvlen;                    // # bytes received
   request req;
   
   // SOCK_DGRAM - another name for packets , associated with connectionless
@@ -133,7 +148,7 @@ int server (short port) {
     return -1;
   }
 
-  printf("Server listening on port %d\n", port);
+  printf("server listening on port "__green("%d\n"), port);
   fflush(stdout); // display message before entering loop
 
   // wait for connections
@@ -141,34 +156,40 @@ int server (short port) {
 
     recvlen = recvfrom(s, &req, sizeof(req), 0, (struct sockaddr *)&remaddr, &addrlen);
 
+    strcpy(req.ip, inet_ntoa(remaddr.sin_addr));
+
     if (recvlen > 0) {
 
       response res;
       memset(&res, 0, sizeof(res));
 
       random = rand() % 3;
-      //printf("%d\n", random);
 
       // switch to simulate errors
       switch(random) {
         
         // execute file command and respond
-        case 2:  //printf("execute file command and respond\n");
-          dispatch(&req, &res);
+        case 2:
+          dispatch(&req, &res, buff);
+          log(&req, __blue("respond"), buff);
           if (sendto(s, &res, sizeof(res), 0, (struct sockaddr *)&remaddr, sizeof(remaddr)) != sizeof(res)) {
             error("sent a different number of bytes than expected");
           }
           break;
       
         // execute but don't respond
-        case 1: //printf("execute but don't respond\n");
-          dispatch(&req, &res);
+        case 1:
+          dispatch(&req, &res, buff);
+          log(&req, __yellow("exec + drop"), buff);
           break;
 
         // don't execute and don't respond
-        case 0: //printf("don't execute and don't respond\n");
+        case 0:
+          strcpy(buff, "");
+          log(&req, __red("drop"), buff);
           break;
       }
+
 
     }
   }
