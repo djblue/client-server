@@ -93,7 +93,7 @@ int get_spawn () {
   return spawn;
 }
 
-int init_spawn () {
+void init_spawn () {
   if (access("spawn", F_OK ) == -1) {
     int val = 0;
     FILE *f = fopen("spawn", "w");

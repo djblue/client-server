@@ -14,6 +14,7 @@ using namespace std;
 // struct to define which clients locked which files
 typedef struct {
   int client; // who locked the file
+  int spawn;
   char name[80]; // file name m:file
   FILE *fd; // file descriptor
 } lock;
@@ -21,8 +22,24 @@ typedef struct {
 // machine_name -> file_name -> lock
 map<string, map<string, lock> > locks;
 
+lock* get_lock (client *c, char *file) {
+  return &locks[string(c->name)][string(file)];
+}
+
+// unlock a file for for a client
+void unlock_file (client *c, char *file) {
+  locks[string(c->name)].erase(string(file));
+}
+
 // check if a file is locked for a client
 int is_locked (client *c, char *file) {
+  lock *l = get_lock(c, file);
+
+  // check if the machine has crashed
+  if (l->spawn < c->spawn) {
+    unlock_file(c, file);
+  }
+
   return locks[string(c->name)].count(string(file));
 }
 
@@ -42,17 +59,9 @@ lock* lock_file (client *c, char *file) {
 
   strncpy(l->name, name, 80);
   l->client = c->id; 
+  l->spawn = c->spawn; 
 
   return l;
-}
-
-lock* get_lock (client *c, char *file) {
-  return &locks[string(c->name)][string(file)];
-}
-
-// unlock a file for for a client
-int unlock_file (client *c, char *file) {
-  locks[string(c->name)].erase(string(file));
 }
 
 

@@ -54,8 +54,10 @@ void dispatch (request *req, response *res, char *log) {
 
   client *c = (client*) &req->name;
   
+  char operation[80];
+  strcpy(operation, req->operation);
   // parse operation
-  char *cmd = strtok(req->operation, " ");
+  char *cmd = strtok(operation, " ");
   char *file = strtok(NULL, " ");
   char *arg = strtok(NULL, " ");
 
@@ -82,7 +84,7 @@ void dispatch (request *req, response *res, char *log) {
   } else if (strncmp("write", cmd, 5) == 0) {
     arg = strtok(arg, "\""); // get character from inside string
     status = file_write(c, file, arg);
-    if (status == strlen(arg)) {
+    if (status == (int)strlen(arg)) {
       strcpy(res->content, "ok - file write");
       strcpy(log, "ok - file write");
     } else {
@@ -111,9 +113,10 @@ void dispatch (request *req, response *res, char *log) {
   cache[string(buffer)] = *res;
 }
 
-void log (request *req, char *action, char *msg) {
+void log (request *req, const char *action, char *msg) {
   printf("{ ip: %s, name: %s, id: %d, index: %d, exec: %s, action: %s, log: "__purple("%s")" }\n",
     req->ip, req->name, req->id, req->index, req->operation, action, msg);
+  fflush(stdout);
 }
 
 // port - desired port number
