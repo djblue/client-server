@@ -1,0 +1,640 @@
+server listening on port 3000
+{ ip: 192.168.1.132, name: test, id: 1, index: 0, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 2, index: 0, exec: open f1.txt readwrite, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 0, exec: open f1.txt read, action: respond, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 3, index: 1, exec: read f1.txt 1, action: exec + drop, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 1, index: 0, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 2, index: 0, exec: open f1.txt readwrite, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 1, exec: read f1.txt 1, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 0, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 1, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 2, index: 0, exec: open f1.txt readwrite, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 2, index: 1, exec: open f1.txt readwrite, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 3, index: 1, exec: read f1.txt 1, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 1, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 2, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 2, index: 1, exec: open f1.txt readwrite, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 3, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 1, index: 4, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 1, exec: read f1.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 2, index: 1, exec: open f1.txt readwrite, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 4, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 1, exec: read f1.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 2, index: 1, exec: open f1.txt readwrite, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 4, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 1, index: 5, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 3, index: 1, exec: read f1.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 2, index: 1, exec: open f1.txt readwrite, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 5, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 6, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 1, exec: read f1.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 2, index: 1, exec: open f1.txt readwrite, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 6, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 1, index: 7, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 3, index: 1, exec: read f1.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 2, index: 1, exec: open f1.txt readwrite, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 7, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 1, exec: read f1.txt 1, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 8, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 3, index: 2, exec: close f1.txt, action: exec + drop, log: ok - file closed }
+{ ip: 192.168.1.132, name: test, id: 2, index: 1, exec: open f1.txt readwrite, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 2, index: 2, exec: open f1.txt readwrite, action: respond, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 2, index: 3, exec: read f1.txt 1, action: exec + drop, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 1, index: 8, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 2, exec: close f1.txt, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 2, index: 3, exec: read f1.txt 1, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 2, exec: close f1.txt, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 8, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 9, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 2, index: 3, exec: read f1.txt 1, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 2, exec: close f1.txt, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 9, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 1, index: 10, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 2, index: 3, exec: read f1.txt 1, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 2, exec: close f1.txt, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 3, exec: open f2.txt read, action: respond, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 3, index: 4, exec: read f2.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 10, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 11, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 1, index: 12, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 1, index: 13, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 2, index: 3, exec: read f1.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 4, exec: read f2.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 13, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 2, index: 3, exec: read f1.txt 1, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 2, index: 4, exec: read f1.txt 2, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 4, exec: read f2.txt 1, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 13, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 14, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 2, index: 4, exec: read f1.txt 2, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 2, index: 5, exec: read f1.txt 3, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 4, exec: read f2.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 14, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 15, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 1, index: 16, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 2, index: 5, exec: read f1.txt 3, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 3, index: 4, exec: read f2.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 16, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 17, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 2, index: 5, exec: read f1.txt 3, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 4, exec: read f2.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 17, exec: open f1.txt read, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 2, index: 5, exec: read f1.txt 3, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 4, exec: read f2.txt 1, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 5, exec: close f2.txt, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 17, exec: open f1.txt read, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 2, index: 5, exec: read f1.txt 3, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 5, exec: close f2.txt, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 17, exec: open f1.txt read, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 2, index: 5, exec: read f1.txt 3, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 5, exec: close f2.txt, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 17, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 18, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 1, index: 19, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 2, index: 5, exec: read f1.txt 3, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 5, exec: close f2.txt, action: respond, log: ok - file closed }
+{ ip: 192.168.1.132, name: test, id: 3, index: 6, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 19, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 20, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 1, index: 21, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 2, index: 5, exec: read f1.txt 3, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 6, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 21, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 2, index: 5, exec: read f1.txt 3, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 2, index: 6, exec: lseek f1.txt 15, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 6, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 1, index: 21, exec: open f1.txt read, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 2, index: 6, exec: lseek f1.txt 15, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 6, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 21, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 2, index: 6, exec: lseek f1.txt 15, action: respond, log: ok - file seek }
+{ ip: 192.168.1.132, name: test, id: 2, index: 7, exec: write f1.txt "xxxxx", action: exec + drop, log: not ok }
+{ ip: 192.168.1.132, name: test, id: 3, index: 6, exec: open f1.txt read, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 21, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 22, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 2, index: 7, exec: write f1.txt "xxxxx", action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 6, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 22, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 2, index: 7, exec: write f1.txt "xxxxx", action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 6, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 7, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 3, index: 8, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 22, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 23, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 2, index: 7, exec: write f1.txt "xxxxx", action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 8, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 23, exec: open f1.txt read, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 2, index: 7, exec: write f1.txt "xxxxx", action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 2, index: 8, exec: close f1.txt, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 8, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 23, exec: open f1.txt read, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 2, index: 8, exec: close f1.txt, action: exec + drop, log: ok - file closed }
+{ ip: 192.168.1.132, name: test, id: 3, index: 8, exec: open f1.txt read, action: exec + drop, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 1, index: 23, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 24, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 2, index: 8, exec: close f1.txt, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 8, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 24, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 1, index: 25, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 1, index: 26, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 3, index: 8, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 9, exec: read f1.txt 1, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 10, exec: lseek f1.txt 5, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 26, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 27, exec: open f1.txt read, action: respond, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 1, index: 28, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 3, index: 10, exec: lseek f1.txt 5, action: respond, log: ok - file seek }
+{ ip: 192.168.1.132, name: test, id: 3, index: 11, exec: read f1.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 28, exec: open f1.txt read, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 11, exec: read f1.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 28, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 11, exec: read f1.txt 1, action: exec + drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 28, exec: open f1.txt read, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 11, exec: read f1.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 28, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 29, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 11, exec: read f1.txt 1, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 29, exec: open f1.txt read, action: exec + drop, log: file locked }
+{ ip: 192.168.1.132, name: test, id: 3, index: 11, exec: read f1.txt 1, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 29, exec: open f1.txt read, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 11, exec: read f1.txt 1, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 12, exec: lseek f1.txt 10, action: respond, log: ok - file seek }
+{ ip: 192.168.1.132, name: test, id: 3, index: 13, exec: read f1.txt 1, action: respond, log: ok - file seek }
+{ ip: 192.168.1.132, name: test, id: 3, index: 14, exec: close f1.txt, action: exec + drop, log: ok - file closed }
+{ ip: 192.168.1.132, name: test, id: 1, index: 29, exec: open f1.txt read, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 14, exec: close f1.txt, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 29, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 14, exec: close f1.txt, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 15, exec: open f2.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 29, exec: open f1.txt read, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 15, exec: open f2.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 29, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 15, exec: open f2.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 29, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 15, exec: open f2.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 29, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 15, exec: open f2.txt read, action: respond, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 3, index: 16, exec: read f2.txt 5, action: respond, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 3, index: 17, exec: read f2.txt 5, action: respond, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 3, index: 18, exec: read f2.txt 5, action: exec + drop, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 1, index: 29, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 3, index: 18, exec: read f2.txt 5, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 3, index: 19, exec: close f2.txt, action: respond, log: ok - file closed }
+{ ip: 192.168.1.132, name: test, id: 1, index: 29, exec: open f1.txt read, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 30, exec: open f1.txt read, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 30, exec: open f1.txt read, action: respond, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 1, index: 31, exec: read f1.txt 5, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 31, exec: read f1.txt 5, action: respond, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 32, exec: write f1.txt "01234", action: exec + drop, log: not ok }
+{ ip: 192.168.1.132, name: test, id: 1, index: 32, exec: write f1.txt "01234", action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 32, exec: write f1.txt "01234", action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 32, exec: write f1.txt "01234", action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 32, exec: write f1.txt "01234", action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 32, exec: write f1.txt "01234", action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 33, exec: lseek f1.txt 15, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 33, exec: lseek f1.txt 15, action: respond, log: ok - file seek }
+{ ip: 192.168.1.132, name: test, id: 1, index: 34, exec: read f1.txt 5, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 34, exec: read f1.txt 5, action: exec + drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 34, exec: read f1.txt 5, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 34, exec: read f1.txt 5, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 34, exec: read f1.txt 5, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 34, exec: read f1.txt 5, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 35, exec: close f1.txt, action: respond, log: ok - file closed }
+{ ip: 192.168.1.132, name: test, id: 1, index: 36, exec: open f2.txt write, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 36, exec: open f2.txt write, action: respond, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 1, index: 36, exec: open f2.txt write, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 37, exec: lseek f2.txt 10, action: respond, log: ok - file seek }
+{ ip: 192.168.1.132, name: test, id: 1, index: 38, exec: write f2.txt "01234", action: respond, log: ok - file write }
+{ ip: 192.168.1.132, name: test, id: 1, index: 39, exec: close f2.txt, action: exec + drop, log: ok - file closed }
+{ ip: 192.168.1.132, name: test, id: 1, index: 39, exec: close f2.txt, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 39, exec: close f2.txt, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 39, exec: close f2.txt, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 39, exec: close f2.txt, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 39, exec: close f2.txt, action: respond, log: res from cache }
+c1.txt ---------------------------------
+req: { name: test, id: 1, index: 0, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 0, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 0, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 1, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 1, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 2, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 3, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 4, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 4, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 4, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 5, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 5, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 6, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 6, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 7, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 7, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 8, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 8, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 8, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 9, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 9, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 10, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 10, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 11, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 12, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 13, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 13, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 13, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 14, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 14, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 15, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 16, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 16, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 17, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 17, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 17, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 17, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 17, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 18, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 19, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 19, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 20, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 21, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 21, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 21, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 21, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 21, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 22, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 22, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 22, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 23, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 23, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 23, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 23, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 24, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 24, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 25, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 26, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 26, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 27, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 28, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 28, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 28, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 28, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 28, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 29, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 29, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 29, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 29, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 29, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 29, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 29, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 29, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 29, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 29, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 29, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 1, index: 30, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 30, spawn: 2, exec: open f1.txt read }
+res: { status: 0, content: ok - file opened }
+req: { name: test, id: 1, index: 31, spawn: 2, exec: read f1.txt 5 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 31, spawn: 2, exec: read f1.txt 5 }
+res: { status: 5, content: aaaaa }
+req: { name: test, id: 1, index: 32, spawn: 2, exec: write f1.txt "01234" }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 32, spawn: 2, exec: write f1.txt "01234" }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 32, spawn: 2, exec: write f1.txt "01234" }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 32, spawn: 2, exec: write f1.txt "01234" }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 32, spawn: 2, exec: write f1.txt "01234" }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 32, spawn: 2, exec: write f1.txt "01234" }
+res: { status: 0, content: not ok }
+req: { name: test, id: 1, index: 33, spawn: 2, exec: lseek f1.txt 15 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 33, spawn: 2, exec: lseek f1.txt 15 }
+res: { status: 0, content: ok - file seek }
+req: { name: test, id: 1, index: 34, spawn: 2, exec: read f1.txt 5 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 34, spawn: 2, exec: read f1.txt 5 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 34, spawn: 2, exec: read f1.txt 5 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 34, spawn: 2, exec: read f1.txt 5 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 34, spawn: 2, exec: read f1.txt 5 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 34, spawn: 2, exec: read f1.txt 5 }
+res: { status: 5, content: eeeee }
+req: { name: test, id: 1, index: 35, spawn: 2, exec: close f1.txt }
+res: { status: 0, content: ok - file closed }
+req: { name: test, id: 1, index: 36, spawn: 3, exec: open f2.txt write }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 36, spawn: 3, exec: open f2.txt write }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 36, spawn: 3, exec: open f2.txt write }
+res: { status: 0, content: ok - file opened }
+req: { name: test, id: 1, index: 37, spawn: 3, exec: lseek f2.txt 10 }
+res: { status: 0, content: ok - file seek }
+req: { name: test, id: 1, index: 38, spawn: 3, exec: write f2.txt "01234" }
+res: { status: 5, content: ok - file write }
+req: { name: test, id: 1, index: 39, spawn: 3, exec: close f2.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 39, spawn: 3, exec: close f2.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 39, spawn: 3, exec: close f2.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 39, spawn: 3, exec: close f2.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 39, spawn: 3, exec: close f2.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 39, spawn: 3, exec: close f2.txt }
+res: { status: 0, content: ok - file closed }
+c2.txt ---------------------------------
+req: { name: test, id: 2, index: 0, spawn: 2, exec: open f1.txt readwrite }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 0, spawn: 2, exec: open f1.txt readwrite }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 0, spawn: 2, exec: open f1.txt readwrite }
+res: { status: -1, content: file locked }
+req: { name: test, id: 2, index: 1, spawn: 2, exec: open f1.txt readwrite }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 1, spawn: 2, exec: open f1.txt readwrite }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 1, spawn: 2, exec: open f1.txt readwrite }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 1, spawn: 2, exec: open f1.txt readwrite }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 1, spawn: 2, exec: open f1.txt readwrite }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 1, spawn: 2, exec: open f1.txt readwrite }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 1, spawn: 2, exec: open f1.txt readwrite }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 1, spawn: 2, exec: open f1.txt readwrite }
+res: { status: -1, content: file locked }
+req: { name: test, id: 2, index: 2, spawn: 2, exec: open f1.txt readwrite }
+res: { status: 0, content: ok - file opened }
+req: { name: test, id: 2, index: 3, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 3, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 3, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 3, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 3, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 3, spawn: 2, exec: read f1.txt 1 }
+res: { status: 1, content: a }
+req: { name: test, id: 2, index: 4, spawn: 2, exec: read f1.txt 2 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 4, spawn: 2, exec: read f1.txt 2 }
+res: { status: 2, content: aa }
+req: { name: test, id: 2, index: 5, spawn: 2, exec: read f1.txt 3 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 5, spawn: 2, exec: read f1.txt 3 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 5, spawn: 2, exec: read f1.txt 3 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 5, spawn: 2, exec: read f1.txt 3 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 5, spawn: 2, exec: read f1.txt 3 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 5, spawn: 2, exec: read f1.txt 3 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 5, spawn: 2, exec: read f1.txt 3 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 5, spawn: 2, exec: read f1.txt 3 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 5, spawn: 2, exec: read f1.txt 3 }
+res: { status: 3, content: aab }
+req: { name: test, id: 2, index: 6, spawn: 2, exec: lseek f1.txt 15 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 6, spawn: 2, exec: lseek f1.txt 15 }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 6, spawn: 2, exec: lseek f1.txt 15 }
+res: { status: 0, content: ok - file seek }
+req: { name: test, id: 2, index: 7, spawn: 2, exec: write f1.txt "xxxxx" }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 7, spawn: 2, exec: write f1.txt "xxxxx" }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 7, spawn: 2, exec: write f1.txt "xxxxx" }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 7, spawn: 2, exec: write f1.txt "xxxxx" }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 7, spawn: 2, exec: write f1.txt "xxxxx" }
+res: { status: 0, content: not ok }
+req: { name: test, id: 2, index: 8, spawn: 2, exec: close f1.txt }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 8, spawn: 2, exec: close f1.txt }
+res: { timeout - no response }
+req: { name: test, id: 2, index: 8, spawn: 2, exec: close f1.txt }
+res: { status: 0, content: ok - file closed }
+c3.txt ---------------------------------
+req: { name: test, id: 3, index: 0, spawn: 2, exec: open f1.txt read }
+res: { status: 0, content: ok - file opened }
+req: { name: test, id: 3, index: 1, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 1, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 1, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 1, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 1, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 1, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 1, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 1, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 1, spawn: 2, exec: read f1.txt 1 }
+res: { status: 1, content: a }
+req: { name: test, id: 3, index: 2, spawn: 2, exec: close f1.txt }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 2, spawn: 2, exec: close f1.txt }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 2, spawn: 2, exec: close f1.txt }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 2, spawn: 2, exec: close f1.txt }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 2, spawn: 2, exec: close f1.txt }
+res: { status: 0, content: ok - file closed }
+req: { name: test, id: 3, index: 3, spawn: 2, exec: open f2.txt read }
+res: { status: 0, content: ok - file opened }
+req: { name: test, id: 3, index: 4, spawn: 2, exec: read f2.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 4, spawn: 2, exec: read f2.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 4, spawn: 2, exec: read f2.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 4, spawn: 2, exec: read f2.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 4, spawn: 2, exec: read f2.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 4, spawn: 2, exec: read f2.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 4, spawn: 2, exec: read f2.txt 1 }
+res: { status: 1, content:  }
+req: { name: test, id: 3, index: 5, spawn: 2, exec: close f2.txt }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 5, spawn: 2, exec: close f2.txt }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 5, spawn: 2, exec: close f2.txt }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 5, spawn: 2, exec: close f2.txt }
+res: { status: 0, content: ok - file closed }
+req: { name: test, id: 3, index: 6, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 6, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 6, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 6, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 6, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 6, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 6, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 3, index: 7, spawn: 2, exec: open f1.txt read }
+res: { status: -1, content: file locked }
+req: { name: test, id: 3, index: 8, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 8, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 8, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 8, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 8, spawn: 2, exec: open f1.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 8, spawn: 2, exec: open f1.txt read }
+res: { status: 0, content: ok - file opened }
+req: { name: test, id: 3, index: 9, spawn: 2, exec: read f1.txt 1 }
+res: { status: 1, content: a }
+req: { name: test, id: 3, index: 10, spawn: 2, exec: lseek f1.txt 5 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 10, spawn: 2, exec: lseek f1.txt 5 }
+res: { status: 0, content: ok - file seek }
+req: { name: test, id: 3, index: 11, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 11, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 11, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 11, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 11, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 11, spawn: 2, exec: read f1.txt 1 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 11, spawn: 2, exec: read f1.txt 1 }
+res: { status: 1, content: b }
+req: { name: test, id: 3, index: 12, spawn: 2, exec: lseek f1.txt 10 }
+res: { status: 0, content: ok - file seek }
+req: { name: test, id: 3, index: 13, spawn: 2, exec: read f1.txt 1 }
+res: { status: 1, content: d }
+req: { name: test, id: 3, index: 14, spawn: 2, exec: close f1.txt }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 14, spawn: 2, exec: close f1.txt }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 14, spawn: 2, exec: close f1.txt }
+res: { status: 0, content: ok - file closed }
+req: { name: test, id: 3, index: 15, spawn: 2, exec: open f2.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 15, spawn: 2, exec: open f2.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 15, spawn: 2, exec: open f2.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 15, spawn: 2, exec: open f2.txt read }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 15, spawn: 2, exec: open f2.txt read }
+res: { status: 0, content: ok - file opened }
+req: { name: test, id: 3, index: 16, spawn: 2, exec: read f2.txt 5 }
+res: { status: 5, content:  }
+req: { name: test, id: 3, index: 17, spawn: 2, exec: read f2.txt 5 }
+res: { status: 5, content:  }
+req: { name: test, id: 3, index: 18, spawn: 2, exec: read f2.txt 5 }
+res: { timeout - no response }
+req: { name: test, id: 3, index: 18, spawn: 2, exec: read f2.txt 5 }
+res: { status: 5, content: 01234 }
+req: { name: test, id: 3, index: 19, spawn: 2, exec: close f2.txt }
+res: { status: 0, content: ok - file closed }
