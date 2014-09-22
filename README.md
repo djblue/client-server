@@ -106,9 +106,9 @@ lock, we remove the old lock. This prevents ferment file locks.
 When a server gets a request it generates a random number and between 0-2 which
 maps to one of the following actions.
 
-- __0__: execute file command
+- __0__: don't execute and don't respond
 - __1__: execute but don't respond
-- __2__: don't execute and don't respond
+- __2__: execute file command
 
 All paths have 1:3 chance of happening.
 
