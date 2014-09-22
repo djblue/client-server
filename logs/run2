@@ -1,0 +1,107 @@
+server listening on port 3000
+{ ip: 192.168.1.132, name: test, id: 1, index: 0, exec: open f1.txt read, action: respond, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 1, index: 1, exec: read f1.txt 5, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 1, exec: read f1.txt 5, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 1, exec: read f1.txt 5, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 1, exec: read f1.txt 5, action: respond, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 2, exec: write f1.txt "01234", action: exec + drop, log: not ok }
+{ ip: 192.168.1.132, name: test, id: 1, index: 2, exec: write f1.txt "01234", action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 3, exec: lseek f1.txt 15, action: exec + drop, log: ok - file seek }
+{ ip: 192.168.1.132, name: test, id: 1, index: 3, exec: lseek f1.txt 15, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 3, exec: lseek f1.txt 15, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 3, exec: lseek f1.txt 15, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 3, exec: lseek f1.txt 15, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 4, exec: read f1.txt 5, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 4, exec: read f1.txt 5, action: respond, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 5, exec: close f1.txt, action: exec + drop, log: ok - file closed }
+{ ip: 192.168.1.132, name: test, id: 1, index: 5, exec: close f1.txt, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 5, exec: close f1.txt, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 5, exec: close f1.txt, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 5, exec: close f1.txt, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 5, exec: close f1.txt, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 6, exec: open f2.txt write, action: exec + drop, log: ok - file opened }
+{ ip: 192.168.1.132, name: test, id: 1, index: 6, exec: open f2.txt write, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 6, exec: open f2.txt write, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 6, exec: open f2.txt write, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 6, exec: open f2.txt write, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 7, exec: lseek f2.txt 10, action: exec + drop, log: ok - file seek }
+{ ip: 192.168.1.132, name: test, id: 1, index: 7, exec: lseek f2.txt 10, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 7, exec: lseek f2.txt 10, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 7, exec: lseek f2.txt 10, action: respond, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 8, exec: write f2.txt "01234", action: respond, log: ok - file write }
+{ ip: 192.168.1.132, name: test, id: 1, index: 9, exec: close f2.txt, action: exec + drop, log: ok - file closed }
+{ ip: 192.168.1.132, name: test, id: 1, index: 9, exec: close f2.txt, action: exec + drop, log: res from cache }
+{ ip: 192.168.1.132, name: test, id: 1, index: 9, exec: close f2.txt, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 9, exec: close f2.txt, action: drop, log:  }
+{ ip: 192.168.1.132, name: test, id: 1, index: 9, exec: close f2.txt, action: respond, log: res from cache }
+c1.txt ---------------------------------
+req: { name: test, id: 1, index: 0, spawn: 1, exec: open f1.txt read }
+res: { status: 0, content: ok - file opened }
+req: { name: test, id: 1, index: 1, spawn: 1, exec: read f1.txt 5 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 1, spawn: 1, exec: read f1.txt 5 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 1, spawn: 1, exec: read f1.txt 5 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 1, spawn: 1, exec: read f1.txt 5 }
+res: { status: 5, content: aaaaa }
+req: { name: test, id: 1, index: 2, spawn: 1, exec: write f1.txt "01234" }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 2, spawn: 1, exec: write f1.txt "01234" }
+res: { status: 0, content: not ok }
+req: { name: test, id: 1, index: 3, spawn: 1, exec: lseek f1.txt 15 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 3, spawn: 1, exec: lseek f1.txt 15 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 3, spawn: 1, exec: lseek f1.txt 15 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 3, spawn: 1, exec: lseek f1.txt 15 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 3, spawn: 1, exec: lseek f1.txt 15 }
+res: { status: 0, content: ok - file seek }
+req: { name: test, id: 1, index: 4, spawn: 1, exec: read f1.txt 5 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 4, spawn: 1, exec: read f1.txt 5 }
+res: { status: 5, content: eeeee }
+req: { name: test, id: 1, index: 5, spawn: 1, exec: close f1.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 5, spawn: 1, exec: close f1.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 5, spawn: 1, exec: close f1.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 5, spawn: 1, exec: close f1.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 5, spawn: 1, exec: close f1.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 5, spawn: 1, exec: close f1.txt }
+res: { status: 0, content: ok - file closed }
+req: { name: test, id: 1, index: 6, spawn: 2, exec: open f2.txt write }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 6, spawn: 2, exec: open f2.txt write }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 6, spawn: 2, exec: open f2.txt write }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 6, spawn: 2, exec: open f2.txt write }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 6, spawn: 2, exec: open f2.txt write }
+res: { status: 0, content: ok - file opened }
+req: { name: test, id: 1, index: 7, spawn: 2, exec: lseek f2.txt 10 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 7, spawn: 2, exec: lseek f2.txt 10 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 7, spawn: 2, exec: lseek f2.txt 10 }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 7, spawn: 2, exec: lseek f2.txt 10 }
+res: { status: 0, content: ok - file seek }
+req: { name: test, id: 1, index: 8, spawn: 2, exec: write f2.txt "01234" }
+res: { status: 5, content: ok - file write }
+req: { name: test, id: 1, index: 9, spawn: 2, exec: close f2.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 9, spawn: 2, exec: close f2.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 9, spawn: 2, exec: close f2.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 9, spawn: 2, exec: close f2.txt }
+res: { timeout - no response }
+req: { name: test, id: 1, index: 9, spawn: 2, exec: close f2.txt }
+res: { status: 0, content: ok - file closed }
